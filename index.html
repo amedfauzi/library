@@ -1,13 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-    <h1>Hello</h1>
+
+    <aside class="sidebar">
+        <button id="open-dialog">Add Book</button>
+
+        <dialog id="book-dialog">
+            <form id="book-form">
+                <h2>Add New Book</h2>
+
+                <label>
+                    Title:
+                    <input type="text" name="title" required />
+                </label>
+
+                <label>
+                    Author:
+                    <input type="text" name="author" required />
+                </label>
+
+                <label>
+                    Pages:
+                    <input type="number" name="pages" min="0" required />
+                </label>
+
+                <menu>
+                    <button type="submit">Add</button>
+                    <button type="button" id="close-dialog">Cancel</button>
+                </menu>
+            </form>
+        </dialog>
+    </aside>
+    <main id="book-container"></main>
+
     <script src="./script.js"></script>
 </body>
+
 </html>
