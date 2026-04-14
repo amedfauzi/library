@@ -63,3 +63,27 @@ form.addEventListener("submit", (e) => {
     form.reset();
     dialog.close();
 });
+
+
+// Remove book handler with event delegation
+const bookContainer = document.getElementById("book-container");
+bookContainer.addEventListener("click", (e) => {
+    const bookElement = e.target.closest(".book");
+    if (!bookElement) return;
+
+    const id = bookElement.dataset.id;
+
+    if (e.target.classList.contains("delete-book")) {
+        const confirmDelete = confirm("Delete this book?");
+        if (confirmDelete) {
+            removeBook(id, bookElement);
+        }
+    }
+});
+
+function removeBook(id, bookElement) {
+    const filtered = myLibrary.filter(book => book.id !== id);
+    filtered.length = 0;
+    myLibrary.push(...filtered);
+    bookElement.remove();
+}
