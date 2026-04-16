@@ -9,6 +9,10 @@ function Book(id, title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+
+    Book.prototype.toggleRead = function () {
+        this.read = !this.read;
+    };
 }
 
 function addBookToLibrary(title, author, pages) {
@@ -65,21 +69,8 @@ form.addEventListener("submit", (e) => {
 });
 
 
-// Remove book handler with event delegation
+// Remove book
 const bookContainer = document.getElementById("book-container");
-bookContainer.addEventListener("click", (e) => {
-    const bookElement = e.target.closest(".book");
-    if (!bookElement) return;
-
-    const id = bookElement.dataset.id;
-
-    if (e.target.classList.contains("delete-book")) {
-        const confirmDelete = confirm("Delete this book?");
-        if (confirmDelete) {
-            removeBook(id, bookElement);
-        }
-    }
-});
 
 function removeBook(id, bookElement) {
     const filtered = myLibrary.filter(book => book.id !== id);
@@ -87,3 +78,33 @@ function removeBook(id, bookElement) {
     myLibrary.push(...filtered);
     bookElement.remove();
 }
+
+// Read book toggle
+function toggleReadStatus(id, button) {
+    const book = myLibrary.find(book => book.id === id);
+    if (!book) return;
+
+    book.toggleRead();
+
+    // update UI
+    button.textContent = book.read ? "Read" : "Not Read";
+}
+
+// Event delegation for book actions
+bookContainer.addEventListener("click", (e) => {
+    const bookElement = e.target.closest(".book");
+    if (!bookElement) return;
+
+    const id = bookElement.dataset.id;
+
+    if (e.target.classList.contains("toggle-read")) {
+        toggleReadStatus(id, e.target);
+    }
+
+    if (e.target.classList.contains("delete-book")) {
+        const confirmed = confirm("Delete this book?");
+        if (!confirmed) return;
+
+        removeBook(id, bookElement);
+    }
+});

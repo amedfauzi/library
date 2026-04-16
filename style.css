@@ -25,3 +25,102 @@ menu {
     justify-content: flex-end;
     gap: 0.5rem;
 }
+
+/* rid Layout */
+#book-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 220px));
+    gap: 1rem;
+
+    justify-content: center;
+    padding: 1rem;
+}
+
+/* Book Card */
+.book {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.book h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.book p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Card State */
+.book.read {
+    border-left: 6px solid #22c55e;
+}
+
+.book.not-read {
+    border-left: 6px solid #ef4444;
+}
+
+/* Card Buttons */
+.book button {
+    border: none;
+    border-radius: 8px;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.book button:hover {
+    transform: scale(1.05);
+}
+
+.toggle-read {
+    background: #e0f2fe;
+}
+
+.delete-book {
+    background: #fee2e2;
+}
+
+/* Add Book Button */
+#open-dialog {
+    display: block;
+    margin: 2rem auto 1rem;
+
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
+    transition: all 0.2s ease;
+}
+
+#open-dialog:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+#open-dialog:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(37, 99, 235, 0.2);
+}
