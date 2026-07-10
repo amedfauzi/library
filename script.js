@@ -57,6 +57,25 @@ closeBtn.addEventListener("click", () => {
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
+    const titleElement = document.querySelector('[name="title"]');
+    const authorElement = document.querySelector('[name="author"]');
+    const pagesElement = document.querySelector('[name="pages"]');
+    titleElement.setCustomValidity("");
+    authorElement.setCustomValidity("");
+    pagesElement.setCustomValidity("");
+
+    if (titleElement.validity.valueMissing) {
+        titleElement.setCustomValidity("The title name must be filled!");
+    } else if (authorElement.validity.valueMissing) {
+        authorElement.setCustomValidity("The author name must be filled!");
+    } else if (pagesElement.validity.valueMissing) {
+        pagesElement.setCustomValidity("The number of pages must be filled!");
+    }
+
+    if (!form.reportValidity()) {
+        return; // Stop form without resetting
+    }
+
     const formData = new FormData(form);
     const title = formData.get("title");
     const author = formData.get("author");
